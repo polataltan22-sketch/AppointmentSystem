@@ -1,7 +1,6 @@
 package Pack;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Hospital {
@@ -182,8 +181,13 @@ public class Hospital {
 				app.menu();
 				
 				System.out.print("Enter your choice: ");
-				choice = scn.nextInt();
-
+			while(!scn.hasNextInt()) {
+				System.err.println("\nERROR: Invalid input, please enter 1 , 2 , 3 , 4 or 5.\n");
+					scn.next();
+				System.out.print("Enter your choice: ");
+			}
+			choice = scn.nextInt();
+				
 				
 			switch(choice) {
 				case 1:
