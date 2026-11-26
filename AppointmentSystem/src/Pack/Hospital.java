@@ -32,8 +32,8 @@ public class Hospital {
 	}
 	
 	
-	public int patientSize(int size) {
-		size = patient.size();
+	public int patientSize() {
+		int size = patient.size();
 		return size;
 	}
 	public int doctorSize() {
@@ -88,7 +88,7 @@ public class Hospital {
 			for(int rows = 0; rows < 35; rows++) {
 				if(columns == 1 && rows == 2)
 				
-				System.out.print("     Hospital Appointment System  ");
+				System.out.print("   Hospital Appointment System    ");
 				
 				else if(columns == 2 && rows == 2) {
 				System.out.print("              Ver1.0              ");
@@ -144,7 +144,7 @@ public class Hospital {
 	}
 	
 	public boolean availableCheck(int roomno) {
-		return doctor.get(roomno).check();
+		return doctor.get(roomno - 1).check();
 	}
 	
 	public static void main(String[] args) {
@@ -190,50 +190,58 @@ public class Hospital {
 				break;
 			case 2:
 				app.displayPatients();
-				System.out.print("Which patient wants to make an appointment?Enter their ID: ");
-				choice_patient = scn.nextInt();
-				if (choice_patient < 1 || choice_patient > app.patientSize(0)) {
-					System.out.println("Invalid input.");
-					choice_patient = 0;
-					break;
-				}
-				else if (!app.eligibleCheck(choice_patient)) {
-					System.out.println("This patient already have an appointment.\n");
-				    break;
-				}
+				do {
+					System.out.print("Which patient wants to make an appointment?Enter their ID: ");
+					choice_patient = scn.nextInt();
+					if (choice_patient < 1 || choice_patient > app.patientSize()) {
+						System.out.println("ERROR: Please choose from 1 to "+app.patientSize()+".");
+						choice_patient = 0;
+					}
+					else if (!app.eligibleCheck(choice_patient)) {
+						System.out.println("ERROR: This patient ALREADY HAVE appointment.\n");
+						choice_patient = 0;
+					}
+					else
+						break;
+				}while(choice_patient < 1 || choice_patient > app.patientSize() || !app.eligibleCheck(choice_patient));
 				break;
 			case 3:
 				if(choice_patient == 0) {
 					System.out.println("ERROR: Please choose a patient first.");
 					break;
 				}
-				else if (!app.eligibleCheck(choice_patient)) {
-					System.out.println("This patient ALREADY HAVE an appointment.\n");
-					choice_patient = 0;
-				    break;
-				}
 				app.displayDiseases();
-				System.out.print("What is their problem?: ");
-				choice_disease = scn.nextInt();
-				if (choice_disease < 1 || choice_disease > app.diseaseSize()) {
-					System.out.println("Please choose from 1 to 5.");
-					break;
-				}
+				do {
+					System.out.print("What is their problem?: ");
+					choice_disease = scn.nextInt();
+					if (choice_disease < 1 || choice_disease > app.diseaseSize()) {
+						System.out.println("ERROR: Please choose from 1 to "+app.diseaseSize()+".");
+						choice_disease = 0;
+					}
+					else
+						break;
+				}while(choice_disease < 1 || choice_disease > app.diseaseSize());
+				
 				app.displayDoctors();
+				
+				do {
 				System.out.print("Which doctor would they like to make an appointment with?: ");
 				choice_doctor = scn.nextInt();
-				choice_doctor -= 1;
-				if (!app.availableCheck(choice_doctor)) {
-				    System.out.println("The doctor they would like to make an appointment with is busy at that time.");
-				    choice_doctor = 0;
-				    break;
-				}
-				else if (choice_doctor < 0 || choice_doctor >= app.doctorSize()) {
-					System.out.println("Invalid number.");
+
+				if (choice_doctor < 1 || choice_doctor > app.doctorSize()) {
+					System.out.println("ERROR: Please choose from 1 to "+app.doctorSize()+".");
 					choice_doctor = 0;
+				}
+				else if (!app.availableCheck(choice_doctor)) {
+				    System.out.println("ERROR: The doctor already have an appointment with a patient at that time.");
+				    choice_doctor = 0;
+				}
+				else
 					break;
 				}
-				app.viewAppointment(choice_patient - 1,choice_doctor,choice_disease - 1);
+				while(choice_doctor < 1 || choice_doctor > app.doctorSize() || !app.availableCheck(choice_doctor));
+				
+				app.viewAppointment(choice_patient - 1,choice_doctor - 1,choice_disease - 1);
 				choice_patient = 0;
 				break;
 			case 4:
