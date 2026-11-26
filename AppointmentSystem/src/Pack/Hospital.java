@@ -74,6 +74,38 @@ public class Hospital {
 		System.out.print("\n-----------------------------------\n\n");
 	}
 	
+	public void displayWelcome() {
+		
+		for(int firstRow = 0; firstRow < 40 ; firstRow++) {
+			System.out.print("=");
+		}
+		
+		System.out.print("\n");
+		
+		for(int columns = 0;columns < 4 ; columns++) {
+			System.out.print("| |");
+			
+			for(int rows = 0; rows < 35; rows++) {
+				if(columns == 1 && rows == 2)
+				
+				System.out.print("     Hospital Appointment System  ");
+				
+				else if(columns == 2 && rows == 2) {
+				System.out.print("              Ver1.0              ");
+				}
+				
+				else if(columns != 2 && columns != 1 && rows != 20) {
+					System.out.print(" ");
+				}
+			}
+			System.out.print("| |\n");
+		}
+		
+		for(int lastRow = 0; lastRow < 40; lastRow++) {
+			System.out.print("=");
+		}
+		
+	}
 	
 	public void singularDoctor(int roomno) {
 		doctor.get(roomno).display();
@@ -145,7 +177,7 @@ public class Hospital {
 		app.addDoctor(4, "Melvin", "Forbis", "Afternoon" , "Thursday", true);
 		app.addDoctor(5, "Roger", "Lum", "Morning" , "Friday", true);
 		
-		System.out.println("-- Welcome to The Hospital Appointment System --");
+		app.displayWelcome();
 		
 		do {
 			
