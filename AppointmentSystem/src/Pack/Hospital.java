@@ -179,12 +179,10 @@ public class Hospital {
 		app.displayWelcome();
 		
 		do {
-				
 				app.menu();
 				
 				System.out.print("Enter your choice: ");
 				choice = scn.nextInt();
-
 
 				
 			switch(choice) {
@@ -197,11 +195,11 @@ public class Hospital {
 						System.out.print("Which patient wants to make an appointment?Enter their ID: ");
 						choice_patient = scn.nextInt();
 						if (choice_patient < 1 || choice_patient > app.patientSize()) {
-							System.out.println("ERROR: Please choose from 1 to "+app.patientSize()+".");
+							System.err.println("ERROR: Please choose from 1 to "+app.patientSize()+".");
 							choice_patient = 0;
 						}
 						else if (!app.eligibleCheck(choice_patient)) {
-							System.out.println("ERROR: This patient ALREADY HAVE appointment.\n");
+							System.err.println("ERROR: This patient ALREADY HAVE appointment.\n");
 							choice_patient = 0;
 						}
 						else
@@ -210,7 +208,7 @@ public class Hospital {
 					break;
 				case 3:
 					if(choice_patient == 0) {
-						System.out.println("ERROR: Please choose a patient first.");
+						System.err.println("ERROR: Please choose a patient first.");
 						break;
 					}
 					app.displayDiseases();
@@ -218,7 +216,7 @@ public class Hospital {
 						System.out.print("What is their problem?: ");
 						choice_disease = scn.nextInt();
 						if (choice_disease < 1 || choice_disease > app.diseaseSize()) {
-							System.out.println("ERROR: Please choose from 1 to "+app.diseaseSize()+".");
+							System.err.println("ERROR: Please choose from 1 to "+app.diseaseSize()+".");
 							choice_disease = 0;
 						}
 						else
@@ -232,11 +230,11 @@ public class Hospital {
 						choice_doctor = scn.nextInt();
 		
 						if (choice_doctor < 1 || choice_doctor > app.doctorSize()) {
-							System.out.println("ERROR: Please choose from 1 to "+app.doctorSize()+".");
+							System.err.println("ERROR: Please choose from 1 to "+app.doctorSize()+".");
 							choice_doctor = 0;
 						}
 						else if (!app.availableCheck(choice_doctor)) {
-						    System.out.println("ERROR: The doctor already have an appointment with a patient at that time.");
+						    System.err.println("ERROR: The doctor already have an appointment with a patient at that time.");
 						    choice_doctor = 0;
 						}
 						else
@@ -254,11 +252,13 @@ public class Hospital {
 					System.out.print("Exiting program....");
 					break;
 				default:
-					System.out.println("\nInvalid input, please enter 1 , 2 , 3 , 4 or 5.\n");
+					System.err.println("\nERROR: Invalid input, please enter 1 , 2 , 3 , 4 or 5.\n");
 					choice = 0;
 					break;
 				}
+				
 		}while(choice != 5);
+		
 	}
 	
 }
