@@ -15,9 +15,9 @@ public class Patients implements HInterface {
 	}
 	
 	public void display() {
-		System.out.println("\nPatient Name: "+this.name);
+		System.out.println("\n-Patient ID: "+this.id);
+		System.out.println("Patient Name: "+this.name);
 		System.out.println("Patient Surname: "+this.surname);
-		System.out.println("-Patient ID: "+this.id);
 		if(appointment == true) {
 			System.out.println("This patient is eligible to get an appointment.\n");
 		}
@@ -25,6 +25,13 @@ public class Patients implements HInterface {
 			System.out.println("This patient is NOT eligible to get an appointment(they already have one).\n");
 		}
 	}
+	
+	public void displayR() {
+		System.out.println("\nPatient Name: "+this.name);
+		System.out.println("Patient Surname: "+this.surname);
+		System.out.println("-Patient ID: "+this.id);
+	}
+	
 	public void notEligible() {
 		this.appointment = false;
 		

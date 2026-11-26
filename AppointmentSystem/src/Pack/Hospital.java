@@ -65,8 +65,8 @@ public class Hospital {
 		System.out.print("\n------------------------------\n");
 		System.out.print("\n\n--------- APPOINTMENT --------\n");
 		System.out.print("Appointment details: \n");
-		patient.get(pat).display();
-		doctor.get(doc).display();
+		patient.get(pat).displayR();
+		doctor.get(doc).displayR();
 		doctor.get(doc).unavailable();
 		patient.get(pat).notEligible();
 		disease.get(dis).display();
@@ -116,6 +116,7 @@ public class Hospital {
 	
 	public static void main(String[] args) {
 		Hospital app = new Hospital();
+		@SuppressWarnings("resource")
 		Scanner scn = new Scanner(System.in);
 		
 		
@@ -207,6 +208,7 @@ public class Hospital {
 				break;
 			default:
 				System.out.println("\nInvalid input, please enter 1 , 2 , 3 , 4 or 5.\n");
+				choice = 0;
 				break;
 			}
 			
