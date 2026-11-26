@@ -19,7 +19,7 @@ public class Doctors implements HInterface {
 	}
 	
 	public void display() {
-		System.out.println("\n-Room Number: "+this.roomNo);
+		System.out.println("\n-Room Number: ["+this.roomNo+"]");
 		System.out.println("Doctor's Name & Surname : "+this.fname+" "+this.sname);
 		System.out.println("Doctor's work time of day: "+this.workPart);
 		System.out.println("Doctor's work day: "+this.workSchedule);
@@ -32,8 +32,8 @@ public class Doctors implements HInterface {
 		
 	}
 	
-	public void displayR() {
-		System.out.println("\n-Room Number: "+this.roomNo);
+	public void displayReceipt() {
+		System.out.println("\n-Room Number: ["+this.roomNo+"]");
 		System.out.println("Doctor's Name & Surname : "+this.fname+" "+this.sname);
 		System.out.println("Appointment time of day: "+this.workPart);
 		System.out.println("Appointment day: "+this.workSchedule);

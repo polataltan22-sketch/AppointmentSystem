@@ -12,7 +12,7 @@ public class Diseases implements HInterface {
 	
 	
 	public void display() {
-		System.out.println("\n-Disease "+this.diseaseID+": "+this.diseases+"\n");
+		System.out.println("\n-Disease ["+this.diseaseID+"]: "+this.diseases+"\n");
 	}
 	
 }

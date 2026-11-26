@@ -62,17 +62,18 @@ public class Hospital {
 	
 	
 	public void viewAppointment(int pat, int doc, int dis) {
-		System.out.print("\n------------------------------\n");
-		System.out.print("\n\n--------- APPOINTMENT --------\n");
-		System.out.print("Appointment details: \n");
-		patient.get(pat).displayR();
-		doctor.get(doc).displayR();
+		System.out.print("\n-----------------------------------\n");
+		System.out.print("\n\n----------- APPOINTMENT -----------\n");
+		System.out.println("Appointment details: \n");
+		patient.get(pat).displayReceipt();
+		doctor.get(doc).displayReceipt();
 		doctor.get(doc).unavailable();
 		patient.get(pat).notEligible();
 		disease.get(dis).display();
-		System.out.print("\n\n---------- RECEIPT -----------\n");
-		System.out.print("\n------------------------------\n\n");
+		System.out.print("\n------------- RECEIPT -------------\n");
+		System.out.print("\n-----------------------------------\n\n");
 	}
+	
 	
 	public void singularDoctor(int roomno) {
 		doctor.get(roomno).display();
@@ -176,6 +177,7 @@ public class Hospital {
 				}
 				else if (!app.eligibleCheck(choice_patient)) {
 					System.out.println("This patient ALREADY HAVE an appointment.\n");
+					choice_patient = 0;
 				    break;
 				}
 				app.displayDiseases();
@@ -191,10 +193,12 @@ public class Hospital {
 				choice_doctor -= 1;
 				if (!app.availableCheck(choice_doctor)) {
 				    System.out.println("The doctor they would like to make an appointment with is busy at that time.");
+				    choice_doctor = 0;
 				    break;
 				}
 				else if (choice_doctor < 0 || choice_doctor >= app.doctorSize()) {
 					System.out.println("Invalid number.");
+					choice_doctor = 0;
 					break;
 				}
 				app.viewAppointment(choice_patient - 1,choice_doctor,choice_disease - 1);

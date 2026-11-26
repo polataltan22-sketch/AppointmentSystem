@@ -15,7 +15,7 @@ public class Patients implements HInterface {
 	}
 	
 	public void display() {
-		System.out.println("\n-Patient ID: "+this.id);
+		System.out.println("\n-Patient ID: ["+this.id+"]");
 		System.out.println("Patient Name: "+this.name);
 		System.out.println("Patient Surname: "+this.surname);
 		if(appointment == true) {
@@ -26,10 +26,10 @@ public class Patients implements HInterface {
 		}
 	}
 	
-	public void displayR() {
+	public void displayReceipt() {
+		System.out.println("-Patient ID: ["+this.id+"]");
 		System.out.println("\nPatient Name: "+this.name);
 		System.out.println("Patient Surname: "+this.surname);
-		System.out.println("-Patient ID: "+this.id);
 	}
 	
 	public void notEligible() {
