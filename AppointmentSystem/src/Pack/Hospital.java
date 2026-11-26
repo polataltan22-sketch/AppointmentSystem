@@ -1,6 +1,7 @@
 package Pack;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Hospital {
@@ -125,8 +126,7 @@ public class Hospital {
 	}
 	
 	public void deleteDoctor(int roomNo) {
-		doctor.removeIf(a->
-						a.roomNo==roomNo);
+		doctor.removeIf(a -> a.roomNo==roomNo);
 	}
 	
 	public void menu() {
@@ -137,7 +137,6 @@ public class Hospital {
 		System.out.println("[3] : Make an appointment.");
 		System.out.println("[4] : Check available doctors to make an appointment with.");
 		System.out.println("[5] : Exit program.");
-		System.out.print("Enter your choice: ");
 	}
 	public boolean eligibleCheck(int id) {
 		return patient.get(id - 1).checkA();
@@ -146,10 +145,10 @@ public class Hospital {
 	public boolean availableCheck(int roomno) {
 		return doctor.get(roomno - 1).check();
 	}
-	
+
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		Hospital app = new Hospital();
-		@SuppressWarnings("resource")
 		Scanner scn = new Scanner(System.in);
 		
 		
@@ -180,84 +179,86 @@ public class Hospital {
 		app.displayWelcome();
 		
 		do {
-			
-			app.menu();
-			choice = scn.nextInt();
-			
+				
+				app.menu();
+				
+				System.out.print("Enter your choice: ");
+				choice = scn.nextInt();
+
+
+				
 			switch(choice) {
-			case 1:
-				app.displayPatients();
-				break;
-			case 2:
-				app.displayPatients();
-				do {
-					System.out.print("Which patient wants to make an appointment?Enter their ID: ");
-					choice_patient = scn.nextInt();
-					if (choice_patient < 1 || choice_patient > app.patientSize()) {
-						System.out.println("ERROR: Please choose from 1 to "+app.patientSize()+".");
-						choice_patient = 0;
-					}
-					else if (!app.eligibleCheck(choice_patient)) {
-						System.out.println("ERROR: This patient ALREADY HAVE appointment.\n");
-						choice_patient = 0;
-					}
-					else
-						break;
-				}while(choice_patient < 1 || choice_patient > app.patientSize() || !app.eligibleCheck(choice_patient));
-				break;
-			case 3:
-				if(choice_patient == 0) {
-					System.out.println("ERROR: Please choose a patient first.");
+				case 1:
+					app.displayPatients();
 					break;
-				}
-				app.displayDiseases();
-				do {
-					System.out.print("What is their problem?: ");
-					choice_disease = scn.nextInt();
-					if (choice_disease < 1 || choice_disease > app.diseaseSize()) {
-						System.out.println("ERROR: Please choose from 1 to "+app.diseaseSize()+".");
-						choice_disease = 0;
-					}
-					else
-						break;
-				}while(choice_disease < 1 || choice_disease > app.diseaseSize());
-				
-				app.displayDoctors();
-				
-				do {
-				System.out.print("Which doctor would they like to make an appointment with?: ");
-				choice_doctor = scn.nextInt();
-
-				if (choice_doctor < 1 || choice_doctor > app.doctorSize()) {
-					System.out.println("ERROR: Please choose from 1 to "+app.doctorSize()+".");
-					choice_doctor = 0;
-				}
-				else if (!app.availableCheck(choice_doctor)) {
-				    System.out.println("ERROR: The doctor already have an appointment with a patient at that time.");
-				    choice_doctor = 0;
-				}
-				else
+				case 2:
+					app.displayPatients();
+					do {
+						System.out.print("Which patient wants to make an appointment?Enter their ID: ");
+						choice_patient = scn.nextInt();
+						if (choice_patient < 1 || choice_patient > app.patientSize()) {
+							System.out.println("ERROR: Please choose from 1 to "+app.patientSize()+".");
+							choice_patient = 0;
+						}
+						else if (!app.eligibleCheck(choice_patient)) {
+							System.out.println("ERROR: This patient ALREADY HAVE appointment.\n");
+							choice_patient = 0;
+						}
+						else
+							break;
+					}while(choice_patient < 1 || choice_patient > app.patientSize() || !app.eligibleCheck(choice_patient));
 					break;
-				}
-				while(choice_doctor < 1 || choice_doctor > app.doctorSize() || !app.availableCheck(choice_doctor));
-				
-				app.viewAppointment(choice_patient - 1,choice_doctor - 1,choice_disease - 1);
-				choice_patient = 0;
-				break;
-			case 4:
-				app.displayDoctors();
-				break;
-			case 5:
-				System.out.print("Exiting program....");
-				break;
-			default:
-				System.out.println("\nInvalid input, please enter 1 , 2 , 3 , 4 or 5.\n");
-				choice = 0;
-				break;
-			}
-			
-		}while(choice != 5);
+				case 3:
+					if(choice_patient == 0) {
+						System.out.println("ERROR: Please choose a patient first.");
+						break;
+					}
+					app.displayDiseases();
+					do {
+						System.out.print("What is their problem?: ");
+						choice_disease = scn.nextInt();
+						if (choice_disease < 1 || choice_disease > app.diseaseSize()) {
+							System.out.println("ERROR: Please choose from 1 to "+app.diseaseSize()+".");
+							choice_disease = 0;
+						}
+						else
+							break;
+					}while(choice_disease < 1 || choice_disease > app.diseaseSize());
+					
+					app.displayDoctors();
+					
+					do {
+						System.out.print("Which doctor would they like to make an appointment with?: ");
+						choice_doctor = scn.nextInt();
 		
+						if (choice_doctor < 1 || choice_doctor > app.doctorSize()) {
+							System.out.println("ERROR: Please choose from 1 to "+app.doctorSize()+".");
+							choice_doctor = 0;
+						}
+						else if (!app.availableCheck(choice_doctor)) {
+						    System.out.println("ERROR: The doctor already have an appointment with a patient at that time.");
+						    choice_doctor = 0;
+						}
+						else
+							break;
+					}
+					while(choice_doctor < 1 || choice_doctor > app.doctorSize() || !app.availableCheck(choice_doctor));
+					
+					app.viewAppointment(choice_patient - 1,choice_doctor - 1,choice_disease - 1);
+					choice_patient = 0;
+					break;
+				case 4:
+					app.displayDoctors();
+					break;
+				case 5:
+					System.out.print("Exiting program....");
+					break;
+				default:
+					System.out.println("\nInvalid input, please enter 1 , 2 , 3 , 4 or 5.\n");
+					choice = 0;
+					break;
+				}
+		}while(choice != 5);
 	}
-
+	
 }
