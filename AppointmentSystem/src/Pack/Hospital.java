@@ -11,34 +11,14 @@ public class Hospital {
 	ArrayList<Patients> patient = new ArrayList<>();
 	
 	
+	
+	
+	
+	
 	public void addDisease(int diseaseID,String diseases) {
 		Diseases d = new Diseases(diseaseID,diseases);
 		
 		disease.add(d);
-	}
-	
-	
-	public void addDoctor(int roomNo,String fname,String sname, String workPart,String workSchedule, boolean availability) {
-		Doctors doc = new Doctors(roomNo,fname,sname,workPart,workSchedule,availability);
-		
-		doctor.add(doc);
-	}
-	
-	
-	public void addPatient(String name,String surname,int id,boolean appointment) {
-		Patients p = new Patients(name,surname,id,appointment);
-		
-		patient.add(p);
-	}
-	
-	
-	public int patientSize() {
-		int size = patient.size();
-		return size;
-	}
-	public int doctorSize() {
-		int size = doctor.size();
-		return size;
 	}
 	
 	public int diseaseSize() {
@@ -53,12 +33,82 @@ public class Hospital {
 		});
 	}
 	
+	public void singleDisease(int disId) {
+		disease.get(disId).display();
+	}
+	
+	
+	
+	
+	
+	
+	
+	public void addDoctor(int roomNo,String fname,String sname, String workPart,String workSchedule, boolean availability) {
+		Doctors doc = new Doctors(roomNo,fname,sname,workPart,workSchedule,availability);
+		
+		doctor.add(doc);
+	}
+	
+	public int doctorSize() {
+		int size = doctor.size();
+		return size;
+	}
 	
 	public void displayDoctors() {
 		doctor.forEach(doc -> {
 			doc.display();
 		});
 	}
+	
+	public void singleDoctor(int roomno) {
+		doctor.get(roomno).display();
+	}
+	
+	public void deleteDoctor(int roomNo) {
+		doctor.removeIf(a -> a.roomNo==roomNo);
+	}
+	
+	public boolean availableCheck(int roomno) {
+		return doctor.get(roomno - 1).check();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public void addPatient(String name,String surname,int id,boolean appointment) {
+		Patients p = new Patients(name,surname,id,appointment);
+		
+		patient.add(p);
+	}
+	
+	public int patientSize() {
+		int size = patient.size();
+		return size;
+	}
+
+	public void singlePatient(int id) {
+		patient.get(id).display();
+	}
+	
+
+	public void displayPatients() {
+		patient.forEach(p -> {
+			p.display();
+		});
+	}
+	
+	public boolean eligibleCheck(int id) {
+		return patient.get(id - 1).checkA();
+	}
+	
+
+	
+	
+
 	
 	
 	public void viewAppointment(int pat, int doc, int dis) {
@@ -107,27 +157,6 @@ public class Hospital {
 		
 	}
 	
-	public void singularDoctor(int roomno) {
-		doctor.get(roomno).display();
-	}
-	
-	public void singularPatient(int id) {
-		patient.get(id).display();
-	}
-	
-	public void singularDisease(int disId) {
-		disease.get(disId).display();
-	}
-	public void displayPatients() {
-		patient.forEach(p -> {
-			p.display();
-		});
-	}
-	
-	public void deleteDoctor(int roomNo) {
-		doctor.removeIf(a -> a.roomNo==roomNo);
-	}
-	
 	public void menu() {
 		
 		System.out.println("\n****** MAIN MENU ******\n");
@@ -137,13 +166,9 @@ public class Hospital {
 		System.out.println("[4] : Check available doctors to make an appointment with.");
 		System.out.println("[5] : Exit program.");
 	}
-	public boolean eligibleCheck(int id) {
-		return patient.get(id - 1).checkA();
-	}
+
 	
-	public boolean availableCheck(int roomno) {
-		return doctor.get(roomno - 1).check();
-	}
+
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
