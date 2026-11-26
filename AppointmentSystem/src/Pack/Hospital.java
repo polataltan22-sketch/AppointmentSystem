@@ -10,11 +10,6 @@ public class Hospital {
 	ArrayList<Doctors> doctor = new ArrayList<>();
 	ArrayList<Patients> patient = new ArrayList<>();
 	
-	
-	
-	
-	
-	
 	public void addDisease(int diseaseID,String diseases) {
 		Diseases d = new Diseases(diseaseID,diseases);
 		
@@ -33,16 +28,6 @@ public class Hospital {
 		});
 	}
 	
-	public void singleDisease(int disId) {
-		disease.get(disId).display();
-	}
-	
-	
-	
-	
-	
-	
-	
 	public void addDoctor(int roomNo,String fname,String sname, String workPart,String workSchedule, boolean availability) {
 		Doctors doc = new Doctors(roomNo,fname,sname,workPart,workSchedule,availability);
 		
@@ -60,25 +45,11 @@ public class Hospital {
 		});
 	}
 	
-	public void singleDoctor(int roomno) {
-		doctor.get(roomno).display();
-	}
-	
-	public void deleteDoctor(int roomNo) {
-		doctor.removeIf(a -> a.roomNo==roomNo);
-	}
-	
 	public boolean availableCheck(int roomno) {
 		return doctor.get(roomno - 1).check();
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+
 	public void addPatient(String name,String surname,int id,boolean appointment) {
 		Patients p = new Patients(name,surname,id,appointment);
 		
@@ -89,12 +60,6 @@ public class Hospital {
 		int size = patient.size();
 		return size;
 	}
-
-	public void singlePatient(int id) {
-		patient.get(id).display();
-	}
-	
-
 	public void displayPatients() {
 		patient.forEach(p -> {
 			p.display();
@@ -106,11 +71,6 @@ public class Hospital {
 	}
 	
 
-	
-	
-
-	
-	
 	public void viewAppointment(int pat, int doc, int dis) {
 		System.out.print("\n-----------------------------------\n");
 		System.out.print("\n\n----------- APPOINTMENT -----------\n");
@@ -124,29 +84,7 @@ public class Hospital {
 		System.out.print("\n-----------------------------------\n\n");
 	}
 	
-	public void displayReceipt(int pat, int doc, int dis) {
-		System.out.print("\n-----------------------------------\n");
-		System.out.print("\n\n----------- APPOINTMENT -----------\n");
-		System.out.println("Appointment details: \n");
-		patient.get(pat).displayReceipt();
-		doctor.get(doc).displayReceipt();
-		disease.get(dis).display();
-		System.out.print("\n------------- RECEIPT -------------\n");
-		System.out.print("\n-----------------------------------\n\n");
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	public void displayWelcome() {
 		
 		for(int firstRow = 0; firstRow < 40 ; firstRow++) {
@@ -189,9 +127,6 @@ public class Hospital {
 		System.out.println("[4] : Check available doctors to make an appointment with.");
 		System.out.println("[5] : Exit program.");
 	}
-
-	
-
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
