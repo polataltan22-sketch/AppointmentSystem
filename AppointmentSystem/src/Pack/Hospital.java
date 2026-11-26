@@ -124,6 +124,29 @@ public class Hospital {
 		System.out.print("\n-----------------------------------\n\n");
 	}
 	
+	public void displayReceipt(int pat, int doc, int dis) {
+		System.out.print("\n-----------------------------------\n");
+		System.out.print("\n\n----------- APPOINTMENT -----------\n");
+		System.out.println("Appointment details: \n");
+		patient.get(pat).displayReceipt();
+		doctor.get(doc).displayReceipt();
+		disease.get(dis).display();
+		System.out.print("\n------------- RECEIPT -------------\n");
+		System.out.print("\n-----------------------------------\n\n");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void displayWelcome() {
 		
 		for(int firstRow = 0; firstRow < 40 ; firstRow++) {
@@ -207,7 +230,7 @@ public class Hospital {
 				
 				System.out.print("Enter your choice: ");
 			while(!scn.hasNextInt()) {
-				System.err.println("\nERROR: Invalid input, please enter 1 , 2 , 3 , 4 or 5.\n");
+				System.err.println("\nERROR: Invalid input, please enter a number.\n");
 					scn.next();
 				System.out.print("Enter your choice: ");
 			}
@@ -221,7 +244,12 @@ public class Hospital {
 				case 2:
 					app.displayPatients();
 					do {
-						System.out.print("Which patient wants to make an appointment?Enter their ID: ");
+							System.out.print("Which patient wants to make an appointment?Enter their ID: ");
+						while(!scn.hasNextInt()) {
+							System.err.println("ERROR: Please enter a number.");
+								scn.next();
+							System.out.print("Which patient wants to make an appointment?Enter their ID: ");
+						}
 						choice_patient = scn.nextInt();
 						if (choice_patient < 1 || choice_patient > app.patientSize()) {
 							System.err.println("ERROR: Please choose from 1 to "+app.patientSize()+".");
@@ -243,6 +271,11 @@ public class Hospital {
 					app.displayDiseases();
 					do {
 						System.out.print("What is their problem?: ");
+					while(!scn.hasNextInt()) {
+						System.err.println("ERROR: Please enter a number.");
+							scn.next();
+						System.out.print("What is their problem?: ");
+					}
 						choice_disease = scn.nextInt();
 						if (choice_disease < 1 || choice_disease > app.diseaseSize()) {
 							System.err.println("ERROR: Please choose from 1 to "+app.diseaseSize()+".");
@@ -251,13 +284,15 @@ public class Hospital {
 						else
 							break;
 					}while(choice_disease < 1 || choice_disease > app.diseaseSize());
-					
 					app.displayDoctors();
-					
 					do {
 						System.out.print("Which doctor would they like to make an appointment with?: ");
+					while(!scn.hasNextInt()) {
+						System.err.println("ERROR: Please enter a number.");
+							scn.next();
+						System.out.print("Which doctor would they like to make an appointment with?: ");
+						}
 						choice_doctor = scn.nextInt();
-		
 						if (choice_doctor < 1 || choice_doctor > app.doctorSize()) {
 							System.err.println("ERROR: Please choose from 1 to "+app.doctorSize()+".");
 							choice_doctor = 0;
